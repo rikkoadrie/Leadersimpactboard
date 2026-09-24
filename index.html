@@ -512,6 +512,10 @@
 
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYZguHj7E-DygGUwKm-FXgzFEx2bOnaPDBu3ExykxHytnq1DY47UaZnCzPYgUOVfzTCA/exec';
+
+// Poin mulai dihitung dari tanggal ini. Log sebelum tanggal ini tidak dihitung & tidak ditampilkan.
+const START_DATE = '2026-09-20';
+
 function currentMonthKey(){
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
@@ -522,14 +526,13 @@ function currentDateKey(){
 }
 
 const activities = [
-  {id:'connecting', name:'Connecting', pts:100, icon:'☕'},
-  {id:'btl', name:'Bawa Calon Partner<br>ke BTL', pts:100, icon:'🧑'},
+  {id:'btl', name:'Bawa Calon Partner<br>ke BTL', pts:50, icon:'🧑'},
   {id:'btlpribadi', name:'BTL Pribadi', pts:200, icon:'🤝'},
+  {id:'jfw', name:'Join Field Work', pts:200, icon:'🖊️'},
+  {id:'connecting', name:'Connecting', pts:50, icon:'☕'},
+  {id:'oneonone', name:'Meeting dengan<br>Direct Partner / Unit', pts:200, icon:'🍜'},
+  {id:'meetingleader', name:'Meeting dengan<br>Leader Group', pts:100, icon:'🌳'},
   {id:'npa', name:'NPA', pts:100, icon:'📋'},
-  {id:'oneonone', name:'Meeting 1 on 1<br>(per partner)', pts:100, icon:'🍜'},
-  {id:'meetingunit', name:'Meeting Unit', pts:100, icon:'👥'},
-  {id:'meetingleader', name:'Meeting Leader Group', pts:50, icon:'🌳'},
-  {id:'jfw', name:'JFW', pts:100, icon:'🖊️'},
   {id:'naa', name:'NAA', pts:200, icon:'⭐'},
 ];
 
@@ -791,6 +794,7 @@ function openModal(id, name){
   document.getElementById('modalActivityName').textContent = name;
   document.getElementById('modalName').value = '';
   document.getElementById('modalNotes').value = '';
+  document.getElementById('modalDate').min = START_DATE;
   document.getElementById('modalDate').value = currentDateKey();
   document.getElementById('modalBackdrop').classList.add('show');
 }
@@ -798,9 +802,14 @@ function closeModal(){
   document.getElementById('modalBackdrop').classList.remove('show');
 }
 function saveModal(){
+  const pickedDate = document.getElementById('modalDate').value || currentDateKey();
+  if (pickedDate < START_DATE){
+    alert('Tanggal paling awal yang bisa dicatat: ' + fmtDate(START_DATE) + ' ' + START_DATE.slice(0,4) + '.');
+    return;
+  }
   const entry = {
     activity: modalActivityId,
-    date: document.getElementById('modalDate').value || currentDateKey(),
+    date: pickedDate,
     name: document.getElementById('modalName').value.trim(),
     notes: document.getElementById('modalNotes').value.trim(),
   };
@@ -879,7 +888,8 @@ function loadFromBackend(name){
   return fetch(`${APPS_SCRIPT_URL}?action=logs&leader=${encodeURIComponent(name)}`)
     .then(res => res.json())
     .then(data => {
-      logs = Array.isArray(data) ? data : [];
+      // hanya ambil log mulai START_DATE; log sebelumnya diabaikan
+      logs = Array.isArray(data) ? data.filter(l => l.date && l.date >= START_DATE) : [];
       render();
     })
     .catch(err => { console.error('Gagal ambil data:', err); render(); });
@@ -1041,6 +1051,7 @@ function openEditModal(activityId, ts){
   document.getElementById('editModalIcon').textContent = act ? act.icon : '';
   document.getElementById('editModalActivityName').textContent = act ? act.name.replace(/<br>/g,' ') : activityId;
   document.getElementById('editModalName').value = entry.name || '';
+  document.getElementById('editModalDate').min = START_DATE;
   document.getElementById('editModalDate').value = entry.date;
   document.getElementById('editModalNotes').value = entry.notes || '';
   document.getElementById('editModalBackdrop').classList.add('show');
@@ -1051,13 +1062,17 @@ function closeEditModal(){
 function saveEditModal(){
   const entry = logs.find(l => l.activity === editingActivity && l.ts === editingTs);
   if (!entry) { closeEditModal(); return; }
+  const newDate = document.getElementById('editModalDate').value || entry.date;
+  if (newDate < START_DATE){
+    alert('Tanggal paling awal yang bisa dicatat: ' + fmtDate(START_DATE) + ' ' + START_DATE.slice(0,4) + '.');
+    return;
+  }
   entry.name = document.getElementById('editModalName').value.trim();
-  entry.date = document.getElementById('editModalDate').value || entry.date;
+  entry.date = newDate;
   entry.notes = document.getElementById('editModalNotes').value.trim();
   const payload = { leader: window.currentLeader, activity: editingActivity, ts: editingTs, date: entry.date, name: entry.name, notes: entry.notes };
   closeEditModal();
   render();
-  const buckets = getWeekBuckets(6);
   showRiwayatDetail(editingActivity, (activities.find(a=>a.id===editingActivity)||{}).name.replace(/<br>/g,' '));
   editLogOnBackend(payload);
 }
