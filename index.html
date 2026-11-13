@@ -86,11 +86,6 @@
   }
   .section-note{font-size:12.5px;color:#8A8E99;margin-bottom:18px;}
 
-  .act-section{
-    font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--gold-soft);
-    margin:26px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);
-  }
-  .act-section:first-child{margin-top:0;}
   .path{position:relative;}
   .stone{position:relative;margin-bottom:14px;}
   .card{
@@ -101,8 +96,7 @@
   .card-left{display:flex;flex-direction:column;gap:2px;flex:1 1 auto;min-width:0;}
   .card-name{font-size:14.5px;font-weight:600;color:var(--paper);}
   .card-meta{font-size:11.5px;color:#8A8E99;}
-  .card-pts{font-size:11px;color:var(--gold-soft);font-weight:700;letter-spacing:.02em;white-space:normal;}
-  .card-name{line-height:1.3;}
+  .card-pts{font-size:11px;color:var(--gold-soft);font-weight:700;letter-spacing:.02em;white-space:nowrap;}
   .stepper{display:flex;align-items:center;gap:10px;flex:0 0 auto;white-space:nowrap;}
   .stepper button{
     width:28px;height:28px;border-radius:8px;border:1px solid var(--line);
@@ -174,6 +168,13 @@
     text-decoration:underline;cursor:pointer;padding:0;
   }
 
+  .push-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:#23262E;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;margin:-12px 0 22px;font-size:12.5px;color:#9CA0AB;}
+  .push-row .push-btn{background:var(--gold);color:#1C1F26;border:none;border-radius:99px;
+    font-size:12px;font-weight:700;padding:7px 14px;cursor:pointer;white-space:nowrap;}
+  .push-row .push-btn.on{background:#1A1C22;color:var(--gold-soft);border:1px solid var(--line);}
+
   /* LOADING */
   .loading-overlay{
     position:fixed;inset:0;background:rgba(28,31,38,0.92);z-index:60;
@@ -190,7 +191,7 @@
     position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
     background:#23262E;border:1px solid var(--line);border-radius:99px;
     padding:8px 16px;font-size:12px;color:#C7CAD1;display:none;
-    align-items:center;gap:8px;z-index:90;
+    align-items:center;gap:8px;z-index:40;
   }
   .inline-saving .dot-spin{
     width:10px;height:10px;border-radius:50%;
@@ -294,10 +295,6 @@
     margin-bottom:8px;cursor:pointer;
   }
   .act-list-item .arrow{color:#8A8E99;}
-  .act-list-item .al-left{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0;}
-  .act-list-item .al-name{font-size:14px;line-height:1.3;min-width:0;}
-  .act-list-item .al-right{display:flex;align-items:center;flex:0 0 auto;margin-left:10px;}
-  .act-list-item .count-badge{white-space:nowrap;}
   .act-list-item .count-badge{
     background:rgba(201,154,60,0.14);color:var(--gold-soft);font-size:11.5px;font-weight:700;
     padding:3px 9px;border-radius:99px;margin-right:10px;
@@ -323,56 +320,19 @@
   .modal-sheet{
     background:#23262E;border-radius:20px 20px 0 0;padding:22px 20px 28px;
     width:100%;max-width:480px;border-top:1px solid var(--line);
-    max-height:92vh;overflow-y:auto;
   }
   .modal-title{font-family:'Fraunces',serif;font-size:19px;margin:0 0 2px;}
   .modal-sub{font-size:12.5px;color:#8A8E99;margin-bottom:18px;}
   .field-label{font-size:12px;color:#9CA0AB;margin-bottom:6px;display:block;font-weight:600;}
   .field-input{
     width:100%;background:#1A1C22;border:1px solid var(--line);border-radius:10px;
-    color:var(--paper);font-size:16px;padding:11px 12px;margin-bottom:16px;font-family:'Inter',sans-serif;
+    color:var(--paper);font-size:14px;padding:11px 12px;margin-bottom:16px;font-family:'Inter',sans-serif;
   }
   textarea.field-input{resize:vertical;min-height:64px;}
-  input[type="date"].field-input{
-    color-scheme:dark;
-    background:#1A1C22;
-    color:var(--paper);
-    border:1px solid var(--line);
-    font-weight:700;
-    min-height:50px;
-    display:block;
-    -webkit-appearance:none;
-    appearance:none;
-    margin-bottom:6px;
-    cursor:pointer;
-  }
-  /* Ikon kalender dijadikan tombol emas yang besar supaya jelas bisa di-tap */
-  input[type="date"].field-input::-webkit-calendar-picker-indicator{
-    opacity:1;
-    cursor:pointer;
-    width:40px;
-    height:40px;
-    padding:0;
-    margin-left:8px;
-    border-radius:10px;
-    background-color:var(--gold);
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:22px 22px;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C1F26' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>");
-    filter:none;
-  }
-  .date-label{color:var(--gold-soft);font-size:13px;}
-  .date-readable{
-    font-size:13px;font-weight:700;color:var(--gold-soft);margin:0 0 16px;
-  }
-  .date-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
-  .date-chip{
-    background:rgba(201,154,60,0.12);border:1.5px solid var(--gold);color:var(--gold-soft);
-    border-radius:99px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer;
-    font-family:'Inter',sans-serif;
-  }
-  .date-chip.active{background:var(--gold);color:#1C1F26;border-color:var(--gold);}
+  input[type="date"].field-input{color-scheme:dark;min-height:46px;display:block;-webkit-appearance:none;appearance:none;cursor:pointer;}
+  .date-chips{display:flex;gap:8px;margin:-8px 0 16px;flex-wrap:wrap;}
+  .date-chip{padding:7px 12px;border-radius:99px;border:1px solid var(--line);background:#1A1C22;color:#C7CAD1;font-size:12px;font-weight:600;cursor:pointer;}
+  .date-chip:active{background:var(--gold);color:#1C1F26;}
   .modal-actions{display:flex;gap:10px;margin-top:4px;}
   .btn{flex:1;padding:13px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer;}
   .btn-primary{background:var(--gold);color:#1C1F26;}
@@ -420,6 +380,11 @@
   <div class="whoami">
     <span id="whoamiText">Halo!</span>
     <button onclick="logout()">Ganti akun</button>
+  </div>
+
+  <div class="push-row" id="pushRow" style="display:none;">
+    <span id="pushText">Pengingat jam 13.00 kalau belum isi</span>
+    <button class="push-btn" id="pushBtn" onclick="togglePush()">Aktifkan</button>
   </div>
 
   <div class="tabbar">
@@ -528,9 +493,13 @@
     <label class="field-label">Nama (partner/prospek/rekan)</label>
     <input type="text" class="field-input" id="modalName" placeholder="Contoh: Budi Santoso">
 
-    <label class="field-label date-label">Tanggal</label>
-    <input type="date" class="field-input" id="modalDate" onchange="syncDateChips('modalDate')" oninput="syncDateChips('modalDate')">
-    <div class="date-readable" id="modalDateText"></div>
+    <label class="field-label">Tanggal</label>
+    <input type="date" class="field-input" id="modalDate" onclick="openDatePicker(this)">
+    <div class="date-chips">
+      <button type="button" class="date-chip" onclick="setDateOffset('modalDate',0)">Hari ini</button>
+      <button type="button" class="date-chip" onclick="setDateOffset('modalDate',-1)">Kemarin</button>
+      <button type="button" class="date-chip" onclick="setDateOffset('modalDate',-2)">2 hari lalu</button>
+    </div>
 
     <label class="field-label">Catatan (opsional)</label>
     <textarea class="field-input" id="modalNotes" placeholder="Contoh: follow up minggu depan, tertarik ikut BTL"></textarea>
@@ -550,9 +519,13 @@
     <label class="field-label">Nama (partner/prospek/rekan)</label>
     <input type="text" class="field-input" id="editModalName" placeholder="Contoh: Budi Santoso">
 
-    <label class="field-label date-label">Tanggal</label>
-    <input type="date" class="field-input" id="editModalDate" onchange="syncDateChips('editModalDate')" oninput="syncDateChips('editModalDate')">
-    <div class="date-readable" id="editModalDateText"></div>
+    <label class="field-label">Tanggal</label>
+    <input type="date" class="field-input" id="editModalDate" onclick="openDatePicker(this)">
+    <div class="date-chips">
+      <button type="button" class="date-chip" onclick="setDateOffset('editModalDate',0)">Hari ini</button>
+      <button type="button" class="date-chip" onclick="setDateOffset('editModalDate',-1)">Kemarin</button>
+      <button type="button" class="date-chip" onclick="setDateOffset('editModalDate',-2)">2 hari lalu</button>
+    </div>
 
     <label class="field-label">Catatan (opsional)</label>
     <textarea class="field-input" id="editModalNotes" placeholder="Contoh: follow up minggu depan"></textarea>
@@ -567,80 +540,33 @@
 
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYZguHj7E-DygGUwKm-FXgzFEx2bOnaPDBu3ExykxHytnq1DY47UaZnCzPYgUOVfzTCA/exec';
-
-// Poin mulai dihitung dari tanggal ini. Log sebelum tanggal ini tidak dihitung & tidak ditampilkan.
-const START_DATE = '2026-09-20';
-
 function currentMonthKey(){
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+}
+function openDatePicker(el){
+  try { if (el.showPicker) el.showPicker(); } catch(e){}
+}
+function setDateOffset(inputId, offset){
+  const d = new Date();
+  d.setDate(d.getDate() + offset);
+  document.getElementById(inputId).value = toISO(d);
 }
 function currentDateKey(){
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
-// Tanggal (YYYY-MM-DD) n hari sebelum hari ini
-function dateKeyOffset(n){
-  const d = new Date();
-  d.setDate(d.getDate() - n);
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
 
-// ============ PEMILIH TANGGAL (input native + tombol cepat) ============
-const DATE_CHIP_DEFS = [
-  {label:'Hari ini', offset:0},
-  {label:'Kemarin', offset:1},
-  {label:'2 hari lalu', offset:2},
-  {label:'3 hari lalu', offset:3},
-];
-function renderDateChips(inputId){
-  // Tombol cepat (Hari ini/Kemarin/dst) sudah dihapus; fungsi ini hanya memperbarui teks tanggal terpilih.
-  syncDateChips(inputId);
-}
-function syncDateChips(inputId){
-  const val = document.getElementById(inputId).value;
-  const textEl = document.getElementById(inputId + 'Text');
-  if (textEl){
-    if (val){
-      const d = toDateObj(val);
-      textEl.textContent = 'Dipilih: ' + WEEKDAY_ID[d.getDay()] + ', ' + d.getDate() + ' ' + MONTH_ID[d.getMonth()] + ' ' + d.getFullYear();
-    } else {
-      textEl.textContent = 'Belum ada tanggal dipilih';
-    }
-  }
-  const wrap = document.getElementById(inputId + 'Chips');
-  if (!wrap) return;
-  wrap.querySelectorAll('.date-chip').forEach(c => {
-    c.className = 'date-chip' + (c.dataset.date === val ? ' active' : '');
-  });
-}
-// Buka kalender native kalau browser mendukung (beberapa HP butuh dipicu manual)
-function enableDatePicker(inputId){
-  const el = document.getElementById(inputId);
-  if (!el || el.dataset.pickerBound) return;
-  el.dataset.pickerBound = '1';
-  el.addEventListener('click', () => {
-    try { if (typeof el.showPicker === 'function') el.showPicker(); } catch (e) { /* abaikan */ }
-  });
-}
-
-const SECTION_BUILDING = 'Building Team';
-const SECTION_SELLING = 'Selling';
 const activities = [
-  {id:'btl', section:SECTION_BUILDING, name:'Bawa Calon Partner<br>ke BTL', pts:50, icon:'🧑'},
-  {id:'btlpribadi', section:SECTION_BUILDING, name:'BTL Pribadi', pts:200, icon:'🤝'},
-  {id:'jfw', section:SECTION_BUILDING, name:'Join Field Work', pts:200, icon:'🖊️'},
-  {id:'connecting', section:SECTION_BUILDING, name:'Connecting', pts:50, icon:'☕'},
-  {id:'oneonone', section:SECTION_BUILDING, name:'Meeting dengan<br>Direct Partner / Unit', pts:200, icon:'🍜'},
-  {id:'meetingleader', section:SECTION_BUILDING, name:'Meeting dengan<br>Leader Group', pts:100, icon:'🌳'},
-  {id:'npa', section:SECTION_BUILDING, name:'NPA', pts:100, icon:'📋'},
-  {id:'naa', section:SECTION_BUILDING, name:'NAA', pts:200, icon:'⭐'},
-  {id:'konsep', section:SECTION_SELLING, name:'Cerita Konsep', pts:100, icon:'💬'},
-  {id:'ilustrasi', section:SECTION_SELLING, name:'Cerita Ilustrasi<br>(per jenis produk)', pts:100, icon:'📊'},
-  {id:'closing', section:SECTION_SELLING, name:'Closing<br>(per SPAJ)', pts:100, icon:'✍️'},
-  {id:'clientconnecting', section:SECTION_SELLING, name:'Client Business<br>Connecting', pts:50, icon:'📞'},
-  {id:'referensi', section:SECTION_SELLING, name:'Referensi &<br>Dikontak', pts:50, icon:'🔗'},
-  {id:'posting', section:SECTION_SELLING, name:'Posting Edukasi/<br>Komunitas', pts:50, icon:'📣', weeklyCap:200},
+  {id:'connecting', name:'Connecting', pts:100, icon:'☕'},
+  {id:'btl', name:'Bawa Calon Partner<br>ke BTL', pts:100, icon:'🧑'},
+  {id:'btlpribadi', name:'BTL Pribadi', pts:200, icon:'🤝'},
+  {id:'npa', name:'NPA', pts:100, icon:'📋'},
+  {id:'oneonone', name:'Meeting 1 on 1<br>(per partner)', pts:100, icon:'🍜'},
+  {id:'meetingunit', name:'Meeting Unit', pts:100, icon:'👥'},
+  {id:'meetingleader', name:'Meeting Leader Group', pts:50, icon:'🌳'},
+  {id:'jfw', name:'JFW', pts:100, icon:'🖊️'},
+  {id:'naa', name:'NAA', pts:200, icon:'⭐'},
 ];
 
 const WEEKDAY_ID = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
@@ -705,27 +631,13 @@ function recomputeTotals(){
   });
 }
 
-// Poin satu aktivitas dari log aktivitas itu. Kalau ada weeklyCap, dibatasi per minggu (Senin-Minggu).
-function actPts(list, a){
-  if (!a.weeklyCap) return list.length * a.pts;
-  const byWeek = {};
-  list.forEach(l => {
-    const k = toISO(mondayOf(toDateObj(l.date)));
-    byWeek[k] = (byWeek[k] || 0) + a.pts;
-  });
-  return Object.keys(byWeek).reduce((s,k) => s + Math.min(byWeek[k], a.weeklyCap), 0);
-}
-// Total poin dari sekumpulan log (semua aktivitas, cap mingguan sudah diterapkan)
-function calcPts(list){
-  return activities.reduce((s,a) => s + actPts(list.filter(l => l.activity === a.id), a), 0);
-}
-function monthPts(){
-  const mk = currentMonthKey();
-  return calcPts(logs.filter(l => l.date && l.date.indexOf(mk) === 0));
-}
-
 function ptsInRange(startISO, endISO){
-  return calcPts(logs.filter(l => l.date >= startISO && l.date <= endISO));
+  return logs
+    .filter(l => l.date >= startISO && l.date <= endISO)
+    .reduce((sum,l) => {
+      const a = activities.find(x => x.id === l.activity);
+      return sum + (a ? a.pts : 0);
+    }, 0);
 }
 
 function render(){
@@ -733,15 +645,7 @@ function render(){
 
   const pathList = document.getElementById('pathList');
   pathList.innerHTML = '';
-  let lastSection = null;
   activities.forEach(a => {
-    if (a.section !== lastSection){
-      lastSection = a.section;
-      const h = document.createElement('div');
-      h.className = 'act-section';
-      h.textContent = a.section;
-      pathList.appendChild(h);
-    }
     const el = document.createElement('div');
     el.innerHTML = `
       <div class="card">
@@ -749,7 +653,7 @@ function render(){
           <div class="act-icon">${a.icon}</div>
           <div class="card-left">
             <div class="card-name">${a.name}</div>
-            <div class="card-pts">${a.pts} pts${a.weeklyCap ? ' · maks ' + a.weeklyCap + ' pts/minggu' : ''}</div>
+            <div class="card-pts">${a.pts} pts</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:14px;flex:0 0 auto;white-space:nowrap;">
@@ -763,7 +667,7 @@ function render(){
     pathList.appendChild(el.firstElementChild);
   });
 
-  const total = monthPts();
+  const total = activities.reduce((sum,a) => sum + a.pts * monthlyTotals[a.id], 0);
   document.getElementById('totalPts').textContent = total.toLocaleString('id-ID') + ' / 4.000';
 
   const pct = Math.min(total / MONTH_TARGET, 1);
@@ -837,7 +741,8 @@ function switchTab(name){
 }
 
 function renderSimulasi(totalArg){
-  const total = totalArg !== undefined ? totalArg : monthPts();
+  const total = totalArg !== undefined ? totalArg
+    : activities.reduce((sum,a) => sum + a.pts * monthlyTotals[a.id], 0);
   const pct = Math.min(total / MONTH_TARGET, 1) * 100;
 
   document.getElementById('simPct').textContent = Math.round(pct) + '%';
@@ -848,7 +753,7 @@ function renderSimulasi(totalArg){
     ? `Butuh ${remaining.toLocaleString('id-ID')} pts lagi ke 4.000`
     : 'Target 4.000 pts udah tercapai bulan ini 🎉';
 
-  const todayPts = calcPts(logs.filter(l => l.date === currentDateKey()));
+  const todayPts = activities.reduce((sum,a) => sum + a.pts * state[a.id], 0);
   const workDays = Math.max(1, parseInt(document.getElementById('simWorkDays').value, 10) || 22);
   const projected = todayPts * workDays;
   const projPct = Math.min(projected / MONTH_TARGET, 1) * 100;
@@ -903,9 +808,111 @@ function enterApp(name){
   document.getElementById('mainApp').style.display = 'block';
   document.getElementById('whoamiText').textContent = 'Halo, ' + name;
   window.currentLeader = name;
+  refreshPushUI();
+  syncPushLeader(name);
   document.getElementById('loadingOverlay').style.display = 'flex';
   Promise.all([loadFromBackend(name), loadBoardFromBackend()])
     .finally(() => { document.getElementById('loadingOverlay').style.display = 'none'; });
+}
+
+// ============ PUSH NOTIFICATION (pengingat jam 13.00 WIB) ============
+const VAPID_PUBLIC_KEY = 'BIHEpU5AX3eeqhIEAgtn_l4_47ne74XNpEyMpaKk9Y4XDvB2E-MSlHRzzva2RoFI0bp9HRsG5wHerU2uO3E1vM4';
+
+function urlB64ToUint8Array(b64){
+  const pad = '='.repeat((4 - b64.length % 4) % 4);
+  const raw = atob((b64 + pad).replace(/-/g, '+').replace(/_/g, '/'));
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+  return out;
+}
+function pushSupported(){
+  return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+}
+function isIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+}
+function postToBackend(payload){
+  return fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(payload)
+  }).then(r => r.json());
+}
+async function getPushReg(){
+  if (!('serviceWorker' in navigator)) return null;
+  try { return await navigator.serviceWorker.register('sw.js'); } catch(e){ return null; }
+}
+async function refreshPushUI(){
+  const row = document.getElementById('pushRow');
+  const btn = document.getElementById('pushBtn');
+  const txt = document.getElementById('pushText');
+  if (!row) return;
+  if (!pushSupported()){
+    if (isIOS() && !isStandalone()){
+      row.style.display = 'flex'; btn.style.display = 'none';
+      txt.textContent = 'Untuk pengingat: buka lewat ikon aplikasi di layar utama (Add to Home Screen).';
+    }
+    return;
+  }
+  row.style.display = 'flex'; btn.style.display = '';
+  let sub = null;
+  try {
+    const reg = await navigator.serviceWorker.getRegistration() || await getPushReg();
+    sub = reg ? await reg.pushManager.getSubscription() : null;
+  } catch(e){}
+  if (Notification.permission === 'denied'){
+    btn.style.display = 'none';
+    txt.textContent = 'Notifikasi diblokir. Aktifkan lewat pengaturan situs/browser.';
+  } else if (sub && Notification.permission === 'granted'){
+    btn.textContent = 'Matikan'; btn.className = 'push-btn on';
+    txt.textContent = 'Pengingat aktif: jam 13.00 jika belum isi';
+  } else {
+    btn.textContent = 'Aktifkan'; btn.className = 'push-btn';
+    txt.textContent = 'Pengingat jam 13.00 kalau belum isi';
+  }
+}
+async function togglePush(){
+  const btn = document.getElementById('pushBtn');
+  btn.disabled = true;
+  try {
+    const reg = await getPushReg();
+    if (!reg) throw new Error('no sw');
+    await navigator.serviceWorker.ready;
+    const existing = await reg.pushManager.getSubscription();
+    if (existing){
+      const endpoint = existing.endpoint;
+      await existing.unsubscribe();
+      try { await postToBackend({action: 'removeSub', endpoint}); } catch(e){}
+    } else {
+      const perm = await Notification.requestPermission();
+      if (perm !== 'granted'){ await refreshPushUI(); btn.disabled = false; return; }
+      const sub = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlB64ToUint8Array(VAPID_PUBLIC_KEY)
+      });
+      await postToBackend({action: 'saveSub', leader: window.currentLeader, subscription: sub.toJSON()});
+      reg.showNotification('Impact Board Leader', {
+        body: 'Pengingat aktif. Kamu akan diingatkan jam 13.00 kalau belum isi aktivitas.',
+        icon: 'icon-192.png'
+      });
+    }
+  } catch(e){
+    alert('Gagal mengatur pengingat. Coba buka lagi aplikasinya lalu ulangi.');
+  }
+  btn.disabled = false;
+  refreshPushUI();
+}
+// sinkronkan nama leader ke langganan yang sudah ada (misal habis "Ganti akun")
+async function syncPushLeader(name){
+  if (!pushSupported() || Notification.permission !== 'granted') return;
+  try {
+    const reg = await getPushReg();
+    if (!reg) return;
+    await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.getSubscription();
+    if (sub) await postToBackend({action: 'saveSub', leader: name, subscription: sub.toJSON()});
+  } catch(e){}
 }
 
 (function initLogin(){
@@ -913,8 +920,6 @@ function enterApp(name){
   if (saved){
     enterApp(saved);
   }
-  enableDatePicker('modalDate');
-  enableDatePicker('editModalDate');
 })();
 
 // ============ MODAL: tambah log aktivitas ============
@@ -926,25 +931,16 @@ function openModal(id, name){
   document.getElementById('modalActivityName').textContent = name;
   document.getElementById('modalName').value = '';
   document.getElementById('modalNotes').value = '';
-  // Tidak ada batas min/max di input — validasi START_DATE dilakukan saat simpan.
-  document.getElementById('modalDate').removeAttribute('min');
-  document.getElementById('modalDate').removeAttribute('max');
   document.getElementById('modalDate').value = currentDateKey();
-  renderDateChips('modalDate');
   document.getElementById('modalBackdrop').classList.add('show');
 }
 function closeModal(){
   document.getElementById('modalBackdrop').classList.remove('show');
 }
 function saveModal(){
-  const pickedDate = document.getElementById('modalDate').value || currentDateKey();
-  if (pickedDate < START_DATE){
-    alert('Tanggal paling awal yang bisa dicatat: ' + fmtDate(START_DATE) + ' ' + START_DATE.slice(0,4) + '.');
-    return;
-  }
   const entry = {
     activity: modalActivityId,
-    date: pickedDate,
+    date: document.getElementById('modalDate').value || currentDateKey(),
     name: document.getElementById('modalName').value.trim(),
     notes: document.getElementById('modalNotes').value.trim(),
   };
@@ -1023,8 +1019,7 @@ function loadFromBackend(name){
   return fetch(`${APPS_SCRIPT_URL}?action=logs&leader=${encodeURIComponent(name)}`)
     .then(res => res.json())
     .then(data => {
-      // hanya ambil log mulai START_DATE; log sebelumnya diabaikan
-      logs = Array.isArray(data) ? data.filter(l => l.date && l.date >= START_DATE) : [];
+      logs = Array.isArray(data) ? data : [];
       render();
     })
     .catch(err => { console.error('Gagal ambil data:', err); render(); });
@@ -1081,8 +1076,8 @@ function renderTrend(){
 
   // breakdown per aktivitas untuk minggu lalu (w1)
   const bd = activities.map(a => {
-    const list = logs.filter(l => l.date >= w1.start && l.date <= w1.end && l.activity === a.id);
-    return {name: a.name.replace(/<br>/g,' '), pts: actPts(list, a)};
+    const count = logs.filter(l => l.date >= w1.start && l.date <= w1.end && l.activity === a.id).length;
+    return {name: a.name.replace(/<br>/g,' '), pts: count * a.pts};
   }).filter(b => b.pts > 0).sort((a,b) => b.pts - a.pts);
 
   document.getElementById('breakdownNote').textContent = `Kontribusi tiap aktivitas ke total minggu ${w1.range} (1 minggu lalu).`;
@@ -1106,42 +1101,22 @@ function renderRiwayatActivityList(){
   const wrap = document.getElementById('riwayatActivityList');
   if (!wrap) return;
   wrap.innerHTML = '';
-  // Rekap minggu berjalan (Senin–Minggu): total poin + rentang tanggal, siap di-screenshot
   const wk = getWeekBuckets(1)[0];
-  const wkLogs = logs.filter(l => l.date >= wk.start && l.date <= wk.endCapped);
-  const secPts = sec => calcPts(wkLogs.filter(l => {
-    const ac = activities.find(x => x.id === l.activity);
-    return ac && ac.section === sec;
-  }));
-  const fmtPts = n => n.toLocaleString('id-ID');
-  const buildingPts = secPts(SECTION_BUILDING);
-  const sellingPts = secPts(SECTION_SELLING);
   const rangeEl = document.getElementById('riwayatWeekRange');
-  if (rangeEl) rangeEl.innerHTML =
-    'Total minggu ini: ' + fmtPts(calcPts(wkLogs)) + ' pts (' + fmtDate(wk.start) + ' sampai ' + fmtDate(wk.end) + ')' +
-    '<br><span style="font-size:13px;">' + SECTION_BUILDING + ': ' + fmtPts(buildingPts) + ' pts &nbsp;·&nbsp; ' + SECTION_SELLING + ': ' + fmtPts(sellingPts) + ' pts</span>';
-  let lastSec = null;
+  const weekTotal = activities.reduce((sum,a)=> sum + a.pts * logs.filter(l => l.activity === a.id && l.date >= wk.start && l.date <= wk.endCapped).length, 0);
+  if (rangeEl) rangeEl.textContent = 'Total minggu ini: ' + weekTotal.toLocaleString('id-ID') + ' pts (' + fmtDate(wk.start) + ' sampai ' + fmtDate(wk.end) + ')';
   activities.forEach(a => {
-    if (a.section !== lastSec){
-      lastSec = a.section;
-      const h = document.createElement('div');
-      h.className = 'act-section';
-      h.textContent = a.section;
-      wrap.appendChild(h);
-    }
-    const aList = wkLogs.filter(l => l.activity === a.id);
-    const count = aList.length;
-    const aPts = actPts(aList, a);
+    const count = logs.filter(l => l.activity === a.id && l.date >= wk.start && l.date <= wk.endCapped).length;
     const row = document.createElement('div');
     row.className = 'act-list-item';
     row.onclick = () => showRiwayatDetail(a.id, a.name.replace(/<br>/g,' '));
     row.innerHTML = `
-      <div class="al-left">
+      <div style="display:flex;align-items:center;gap:12px;">
         <div class="act-icon">${a.icon}</div>
-        <div class="al-name">${a.name.replace(/<br>/g,' ')}</div>
+        <div>${a.name.replace(/<br>/g,' ')}</div>
       </div>
-      <div class="al-right">
-        <span class="count-badge">${count}x${count ? ' · ' + aPts.toLocaleString('id-ID') + ' pts' : ''}</span>
+      <div style="display:flex;align-items:center;">
+        <span class="count-badge">${count}x</span>
         <span class="arrow">›</span>
       </div>
     `;
@@ -1210,10 +1185,7 @@ function openEditModal(activityId, ts){
   document.getElementById('editModalIcon').textContent = act ? act.icon : '';
   document.getElementById('editModalActivityName').textContent = act ? act.name.replace(/<br>/g,' ') : activityId;
   document.getElementById('editModalName').value = entry.name || '';
-  document.getElementById('editModalDate').removeAttribute('min');
-  document.getElementById('editModalDate').removeAttribute('max');
   document.getElementById('editModalDate').value = entry.date;
-  renderDateChips('editModalDate');
   document.getElementById('editModalNotes').value = entry.notes || '';
   document.getElementById('editModalBackdrop').classList.add('show');
 }
@@ -1223,17 +1195,13 @@ function closeEditModal(){
 function saveEditModal(){
   const entry = logs.find(l => l.activity === editingActivity && l.ts === editingTs);
   if (!entry) { closeEditModal(); return; }
-  const newDate = document.getElementById('editModalDate').value || entry.date;
-  if (newDate < START_DATE){
-    alert('Tanggal paling awal yang bisa dicatat: ' + fmtDate(START_DATE) + ' ' + START_DATE.slice(0,4) + '.');
-    return;
-  }
   entry.name = document.getElementById('editModalName').value.trim();
-  entry.date = newDate;
+  entry.date = document.getElementById('editModalDate').value || entry.date;
   entry.notes = document.getElementById('editModalNotes').value.trim();
   const payload = { leader: window.currentLeader, activity: editingActivity, ts: editingTs, date: entry.date, name: entry.name, notes: entry.notes };
   closeEditModal();
   render();
+  const buckets = getWeekBuckets(6);
   showRiwayatDetail(editingActivity, (activities.find(a=>a.id===editingActivity)||{}).name.replace(/<br>/g,' '));
   editLogOnBackend(payload);
 }
@@ -1279,7 +1247,7 @@ const peers = [
 const ALL_LEADERS = ['Rikko & Adrie', 'Krisna & Sarah', 'Tonny & Icha'];
 
 function renderBoard(){
-  const total = monthPts();
+  const total = activities.reduce((sum,a) => sum + a.pts * monthlyTotals[a.id], 0);
   const myPct = Math.min(total / MONTH_TARGET, 1);
   const myName = window.currentLeader || 'Kamu';
 
